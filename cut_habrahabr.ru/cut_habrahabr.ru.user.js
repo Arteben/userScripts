@@ -14,23 +14,26 @@ switch (true) {
     case /(http:\/\/habrahabr\.ru\/top\/)/.test(location):
     case /(http:\/\/habrahabr\.ru\/feed\/)/.test(location):
     case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/$)/.test(location): 
-        hide_leftbar();
+        hide_rightbar();
         hide_null_posts();
         hide_column_bottom();
     case /(http:\/\/habrahabr\.ru\/post\/)/.test(location):
-        hide_leftbar();
+        hide_rightbar();
         hide_column_bottom();
         hide_after_post_show();
         hide_comments_sidebar_right();
     break;
     case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/)/.test(location):
-        hide_leftbar();
+        hide_rightbar();
         hide_column_bottom();
         hide_block_after_post_company();
     break;
+    case /(http:\/\/habrahabr\.ru\/users\/.*\/)/.test(location):
+        hide_rightbar();
+    break;
 }
 
-function hide_leftbar() {
+function hide_rightbar() {
     document.getElementsByClassName('sidebar_right')[0].style.display = 'none';
     document.getElementsByClassName('content_left')[0].style.paddingRight = '20px';
 }
