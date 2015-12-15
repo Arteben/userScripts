@@ -3,6 +3,7 @@
 // @namespace   arteben
 // @include     http://habrahabr.ru/*
 // @version     1
+// @grant none
 // ==/UserScript==
 
 var sait = 'http://habrahabr.ru/';
@@ -13,7 +14,10 @@ switch (true) {
     case /(http:\/\/habrahabr\.ru\/all\/)$/.test(location):
     case /(http:\/\/habrahabr\.ru\/top\/)/.test(location):
     case /(http:\/\/habrahabr\.ru\/feed\/)/.test(location):
-    case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/$)/.test(location): 
+    case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/$)/.test(location):
+    case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/$)/.test(location):
+    case /(http:\/\/habrahabr\.ru\/sandbox\/$)/.test(location):
+    case /(http:\/\/habrahabr\.ru\/hub\/)/.test(location): 
         hide_rightbar();
         hide_null_posts();
         hide_column_bottom();
@@ -29,6 +33,9 @@ switch (true) {
         hide_block_after_post_company();
     break;
     case /(http:\/\/habrahabr\.ru\/users\/.*\/)/.test(location):
+        hide_rightbar();
+    break;
+    case /(http:\/\/habrahabr\.ru\/sandbox\/)/.test(location):
         hide_rightbar();
     break;
 }
