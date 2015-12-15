@@ -12,6 +12,7 @@ switch (true) {
     case /(http:\/\/habrahabr\.ru\/interesting\/)$/.test(location):
     case /(http:\/\/habrahabr\.ru\/all\/)$/.test(location):
     case /(http:\/\/habrahabr\.ru\/top\/)/.test(location):
+    case /(http:\/\/habrahabr\.ru\/feed\/)/.test(location):
     case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/$)/.test(location): 
         hide_leftbar();
         hide_null_posts();
@@ -20,6 +21,12 @@ switch (true) {
         hide_leftbar();
         hide_column_bottom();
         hide_after_post_show();
+        hide_comments_sidebar_right();
+    break;
+    case /(http:\/\/habrahabr\.ru\/company\/.+\/blog\/)/.test(location):
+        hide_leftbar();
+        hide_column_bottom();
+        hide_block_after_post_company();
     break;
 }
 
@@ -50,18 +57,19 @@ function hide_after_post_show(){
     var post = document.getElementsByClassName('post_show');
     var next_node = post[0].nextSibling;
     
-    
     for(;;) {
         
         if (next_node.nodeType === 1){
             next_node.style.display = 'none';
         }
         
-        if (next_node.nextSibling !== undefined)
+        if (next_node.nextSibling !== null){
             next_node = next_node.nextSibling;
-        else
-            break;
-        
+        }
+                    
+        else{
+            break;            
+        }        
     }
 }
 
@@ -69,4 +77,22 @@ function hide_after_post_show(){
 function hide_column_bottom (){
     var column_bottom = document.getElementsByClassName('column-wrapper_bottom')[0];
     column_bottom.style.display = 'none';
+}
+
+function hide_block_after_post_company(){
+    
+    var block_after_post = document.getElementsByClassName('block_after_post')[0];
+    console.log(block_after_post);
+    block_after_post.style.display = 'none';
+}
+
+function  hide_comments_sidebar_right() {
+    var column_wrapper = document.getElementsByClassName('column-wrapper column-wrapper_comments')[0];
+    
+    var sidebar = column_wrapper.children[1];
+                  
+    var content = column_wrapper.children[0];
+         
+    sidebar.style.display = 'none';
+    content.style.paddingRight = '100px';
 }
